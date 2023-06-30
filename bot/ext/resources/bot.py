@@ -2,9 +2,16 @@
 
 from __future__ import annotations
 
+from typing import Any, Coroutine
+
+import asyncio
+import pkgutil
+
 from httpx import AsyncClient
 
-from discord import Intents, app_commands
+import discord
+from discord import Guild, Intents, app_commands, Object
+from discord.ext.commands import Cog, Context, command
 from discord.ext.commands import Bot as BotBase
 
 
@@ -12,30 +19,56 @@ class Bot(BotBase):
     """Custom implementation of `discord.ext.commands.Bot`."""
 
     def __init__(self,
-                httpx_client: AsyncClient,
                 bot_token: str,
                 bot_prefix: str = '.',
-                *args,
+                guild_id: Guild | int | None = None,
+                httpx_client: AsyncClient | None = None,
+                *args,  
                 **kwargs
                  ) -> None:
 
-        self.httpx_client: AsyncClient = httpx_client
         self.bot_token: str = bot_token
         self.bot_prefix: str = bot_prefix
-        
+        self.guild: Guild | int | None = guild_id
+        self.httpx_client: AsyncClient | None = httpx_client 
+
         super().__init__(command_prefix=self.bot_prefix,
                         intents=Intents.all(),
                         *args,
                         **kwargs
-                         )
-        
+                         )            
+    
+
     async def _set(self,
              ) -> None:
-        """Sets and checks `Bot` attributes and connections."""
-
+        
         if self.httpx_client is None or not isinstance(self.httpx_client, AsyncClient):
             setattr(self, 'httpx_client', AsyncClient())
 
-        # TODO: See about implementing a websocket connection check for the future webserver.
+        if self.guild is None or not isinstance(self.guild, Object):
+            setattr(self, 'guild', Object(id=0))
+
+        if self.bot_token is None or not isinstance(self.bot_token, str):
+            raise ValueError('Bot token must be a string.')        
         
+    async def setup_hook(self
+                         ) -> None:
+        
+        await self._set()
+        packages: list[pkgutil.ModuleInfo] = [package for package in pkgutil.iter_modules(['cogs'])]
+
+        for package in packages:
+            await self.load_extension(f'cogs.{package.name}')
+            print(f'Loaded {package.name} cog.')
+
+        return await super().setup_hook()
+    
+    def run(self
+            ) -> None:
+        
+        asyncio.run(super().run(self.bot_token)) # type: ignore 
+    
+    
+    
+           
     
