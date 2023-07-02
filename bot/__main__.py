@@ -9,15 +9,14 @@ conf = dotenv_values(dotenv_path='.env')
 
 token: str | None = conf.get('TOKEN')
 prefix: str | None = conf.get('PREFIX')
-guild_id: str | None = conf.get('GUILD_ID')
+guild_id: int | None = conf.get('GUILD_ID') # type: ignore
 
 bot = Bot(bot_token=token, bot_prefix=prefix, guild_id=guild_id) # type: ignore
 
-@bot.command()
-async def sync(ctx: Context):
-    await ctx.send('Syncing...')
-    await ctx.send(ctx.guild.id)
-    guild = bot.get_guild(ctx.guild)# type: ignore
-    bot.tree.copy_global_to(guild=ctx.guild)
-    await bot.tree.sync(guild=ctx.guild)
+@bot.command(name='Syncronize', aliases=['sync'], description='Syncronize all slash commands')
+async def sync(ctx: Context) -> None:
+    """Syncronize all slash commands"""
+    await bot.tree.copy_global_to(ctx.guild_id) # type: ignore
+    await bot.tree.sync(ctx.guild_id) # type: ignore
+
 bot.run()

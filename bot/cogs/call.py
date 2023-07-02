@@ -10,7 +10,9 @@ from discord.ext.commands import Cog, Context, command
 
 
 class test(commands.Cog):
-  def __init__(self, bot: commands.Bot) -> None:
+  def __init__(self,
+              bot: commands.Bot
+               ) -> None:
     self.bot = bot
     
   @app_commands.command(name="test-command", description="Test command")

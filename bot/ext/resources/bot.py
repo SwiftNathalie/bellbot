@@ -27,10 +27,10 @@ class Bot(BotBase):
                 **kwargs
                  ) -> None:
 
-        self.bot_token: str = bot_token
-        self.bot_prefix: str = bot_prefix
-        self.guild: Guild | int | None = guild_id
-        self.httpx_client: AsyncClient | None = httpx_client 
+        self.bot_token = bot_token
+        self.bot_prefix = bot_prefix
+        self.guild = guild_id
+        self.httpx_client = httpx_client 
 
         super().__init__(command_prefix=self.bot_prefix,
                         intents=Intents.all(),
@@ -40,7 +40,7 @@ class Bot(BotBase):
     
 
     async def _set(self,
-             ) -> None:
+                    ) -> None:
         
         if self.httpx_client is None or not isinstance(self.httpx_client, AsyncClient):
             setattr(self, 'httpx_client', AsyncClient())
