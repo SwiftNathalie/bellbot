@@ -1,11 +1,9 @@
 """Cog for slash commands"""
 from __future__ import annotations
 
-from typing import Any, Coroutine
-
 import discord
-from discord import app_commands
 import discord.ext.commands as commands
+from discord import app_commands
 from discord.ext.commands import Cog, Context, command
 
 

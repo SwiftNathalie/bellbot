@@ -1,9 +1,8 @@
 """Entry point for BellBot."""
 
 from discord.ext.commands import Context
-from ext.resources.bot import Bot
-
 from dotenv import dotenv_values
+from ext.resources.bot import Bot
 
 conf = dotenv_values(dotenv_path=".env")
 
@@ -11,7 +10,8 @@ token: str | None = conf.get("TOKEN")
 prefix: str | None = conf.get("PREFIX")
 guild_id: int | None = conf.get("GUILD_ID")  # type: ignore
 
-bot = Bot(bot_token=token, bot_prefix=prefix, guild_id=guild_id)  # type: ignore
+bot = Bot(bot_token=token, bot_prefix=prefix,
+          guild_id=guild_id)  # type: ignore
 
 
 @bot.command(

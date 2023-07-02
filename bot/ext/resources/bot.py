@@ -2,17 +2,14 @@
 
 from __future__ import annotations
 
-from typing import Any, Coroutine
-
 import asyncio
 import pkgutil
 
-from httpx import AsyncClient
-
 import discord
-from discord import Guild, Intents, app_commands, Object
-from discord.ext.commands import Cog, Context, command
+from discord import Guild, Intents, Object, app_commands
 from discord.ext.commands import Bot as BotBase
+from discord.ext.commands import Cog, Context, command
+from httpx import AsyncClient
 
 
 class Bot(BotBase):
