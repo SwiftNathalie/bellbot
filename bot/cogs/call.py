@@ -10,17 +10,14 @@ from discord.ext.commands import Cog, Context, command
 
 
 class test(commands.Cog):
-  def __init__(self,
-              bot: commands.Bot
-               ) -> None:
-    self.bot = bot
-    
-  @app_commands.command(name="test-command", description="Test command")
-  async def mcommand(self, interaction: discord.Interaction) -> None:
-    """ /command-1 """
-    await interaction.response.send_message('Test', ephemeral=True)
+    def __init__(self, bot: commands.Bot) -> None:
+        self.bot = bot
 
+    @app_commands.command(name="test-command", description="Test command")
+    async def mcommand(self, interaction: discord.Interaction) -> None:
+        """/command-1"""
+        await interaction.response.send_message("Test", ephemeral=True)
 
 
 async def setup(bot: commands.Bot) -> None:
-  await bot.add_cog(test(bot))
+    await bot.add_cog(test(bot))
