@@ -4,9 +4,12 @@ repos:
     hooks:
       - id: black
         args: [--line-length=88]
+        pass_filenames: false
+
 
   - repo: https://github.com/PyCQA/pylint
     rev: v3.0.0a6
     hooks:
       - id: pylint
         args: [--rcfile=.pylintrc]
+        pass_filenames: false
