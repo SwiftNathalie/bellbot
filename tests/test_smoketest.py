@@ -1,9 +1,27 @@
 """Stub test file"""
-import pytest
+
+# Just enough to stop pylint from complaining
 
 
-@pytest.mark.asyncio
-async def smoke_test() -> bool:
-    """Smoke test"""
-    assert True is True
-    return True
+class SmokeTest:
+    """Stub test class"""
+
+    def test_smoke(self) -> None:
+        """Stub test method"""
+        assert True
+
+    def test_smoke2(self) -> None:
+        """Stub test method"""
+        assert True
+
+    def test_smoke3(self) -> None:
+        """Stub test method"""
+        assert True
+
+    def test_smoke4(self) -> None:
+        """Stub test method"""
+        assert True
+
+    def test_smoke5(self) -> None:
+        """Stub test method"""
+        assert True

@@ -30,6 +30,9 @@ norecursedirs = [
   ".git"
 ]
 
+[tool.poetry.scripts]
+test = "pytest"
+
 
 [build-system]
 requires = ["poetry-core"]

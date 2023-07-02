@@ -5,10 +5,8 @@ from __future__ import annotations
 import asyncio
 import pkgutil
 
-import discord
-from discord import Guild, Intents, Object, app_commands
+from discord import Guild, Intents, Object
 from discord.ext.commands import Bot as BotBase
-from discord.ext.commands import Cog, Context, command
 from httpx import AsyncClient
 
 

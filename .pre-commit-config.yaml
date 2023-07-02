@@ -3,26 +3,26 @@ repos:
     rev: 23.3.0
     hooks:
       - id: black
-        args: [--line-length=88]
+        args: [--line-length=88, ., --extend-exclude, .]
         pass_filenames: false
 
   - repo: https://github.com/PyCQA/pylint
     rev: v3.0.0a6
     hooks:
       - id: pylint
-        args: [--rcfile=.pylintrc]
+        args: [--rcfile=.pylintrc, --recursive=y, --load-plugins=pylint.extensions.docparams, . ]
         pass_filenames: false
 
   - repo: https://github.com/PyCQA/autoflake
     rev: v2.2.0
     hooks:
       - id: autoflake
-        args: [--in-place, --remove-unused-variables, --recursive, .]
+        args: [--in-place, --remove-unused-variables, --recursive, --remove-all-unused-imports, .]
         pass_filenames: false
 
   - repo: https://github.com/PyCQA/isort
     rev: 5.12.0
     hooks:
       - id: isort
-        args: [--recursive, .]
+        args: [.]
         pass_filenames: false

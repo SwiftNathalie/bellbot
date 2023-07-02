@@ -2,9 +2,8 @@
 from __future__ import annotations
 
 import discord
-import discord.ext.commands as commands
 from discord import app_commands
-from discord.ext.commands import Cog, Context, command
+from discord.ext import commands
 
 
 class test(commands.Cog):
@@ -18,4 +17,5 @@ class test(commands.Cog):
 
 
 async def setup(bot: commands.Bot) -> None:
-    await bot.add_cog(test(bot))
+    """Cog setup"""
+    await bot.add_cog(test(bot=bot))
