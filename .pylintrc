@@ -1,8 +1,2 @@
 [MASTER]
 ignore=.venv
-
-[pylint.plugins]
-load-plugins=pylint_pyproject
-
-[pylint_pyproject]
-pyproject-path=path/to/pyproject.toml

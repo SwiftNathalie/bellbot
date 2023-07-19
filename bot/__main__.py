@@ -11,7 +11,7 @@ token: str | None = conf.get("TOKEN")
 prefix: str | None = conf.get("PREFIX")
 guild_id: int | None = conf.get("GUILD_ID")  # type: ignore
 
-bot = Bot(bot_token=token, bot_prefix=prefix, guild_id=guild_id)  # type: ignore
+bot = Bot(bot_token=token, bot_prefix=prefix, guild_id=guild_id, httpx_client=None)  # type: ignore
 
 
 @bot.command(name="Syncronize", aliases=["sync"], description="Syncronize all slash commands")
