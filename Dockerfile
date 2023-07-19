@@ -3,7 +3,7 @@ FROM python:3.11
 WORKDIR /app
 
 COPY pyproject.toml poetry.lock ./
-COPY ./bot/.env .
+COPY .env .
 
 RUN pip install poetry
 RUN poetry config virtualenvs.create false

@@ -1,22 +1,24 @@
 """Entry point for BellBot."""
 
 from discord.ext.commands import Context
-from ext.resources.bot import Bot
-
 from dotenv import dotenv_values
 
-conf = dotenv_values(dotenv_path='.env')
+from bot.ext.resources.bot import Bot
 
-token: str | None = conf.get('TOKEN')
-prefix: str | None = conf.get('PREFIX')
-guild_id: int | None = conf.get('GUILD_ID') # type: ignore
+conf = dotenv_values(dotenv_path=".env")
 
-bot = Bot(bot_token=token, bot_prefix=prefix, guild_id=guild_id) # type: ignore
+token: str | None = conf.get("TOKEN")
+prefix: str | None = conf.get("PREFIX")
+guild_id: int | None = conf.get("GUILD_ID")  # type: ignore
 
-@bot.command(name='Syncronize', aliases=['sync'], description='Syncronize all slash commands')
+bot = Bot(bot_token=token, bot_prefix=prefix, guild_id=guild_id, httpx_client=None)  # type: ignore
+
+
+@bot.command(name="Syncronize", aliases=["sync"], description="Syncronize all slash commands")
 async def sync(ctx: Context) -> None:
     """Syncronize all slash commands"""
-    await bot.tree.copy_global_to(ctx.guild_id) # type: ignore
-    await bot.tree.sync(ctx.guild_id) # type: ignore
+    await bot.tree.copy_global_to(ctx.guild_id)  # type: ignore
+    await bot.tree.sync(ctx.guild_id)  # type: ignore
+
 
 bot.run()
